@@ -16,7 +16,7 @@ username: string;
 @IsString()
 @MinLength(8)
 @Matches(/^(?=.*[A-Z])(?=.*\d).+$/, {
-message: 'La contraseña debe tener al menos una mayúscula y un número'
+message: 'La contraseña debe tener al menos una mayuscula y un numero'
 })
 password: string;
 

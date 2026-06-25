@@ -18,13 +18,19 @@ async listar(ordenar: string = 'fecha', offset: number = 0, limit: number = 10, 
     const filtro: any = { eliminada: false };
     if (autorId) filtro.autorId = autorId;
 
-    const orden: any = ordenar === 'likes'
-    ? { 'likes': -1 }
-    : { createdAt: -1 };
+    if (ordenar === 'likes') {
+    return this.publicacionModel.aggregate([
+        { $match: filtro },
+        { $addFields: { likesCount: { $size: '$likes' } } },
+        { $sort: { likesCount: -1 } },
+        { $skip: offset },
+        { $limit: limit }
+    ]);
+    }
 
     return this.publicacionModel
     .find(filtro)
-    .sort(orden)
+    .sort({ createdAt: -1 })
     .skip(offset)
     .limit(limit);
 }

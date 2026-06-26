@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { AuthModule } from './auth/auth.module';
 import { PublicacionesModule } from './publicaciones/publicaciones.module';
+import { ComentariosModule } from './comentarios/comentarios.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { PublicacionesModule } from './publicaciones/publicaciones.module';
     UsuariosModule,
     AuthModule,
     PublicacionesModule,
+    ComentariosModule,
   ],
   controllers: [AppController],
   providers: [AppService],

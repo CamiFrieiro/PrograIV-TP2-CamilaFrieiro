@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Controller, Post, Body, UploadedFile, UseInterceptors, Headers, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegistroDto } from './dto/registro.dto';
 import { LoginDto } from './dto/login.dto';
@@ -34,5 +34,19 @@ registro(@Body() registroDto: RegistroDto, @UploadedFile() file?: Express.Multer
 @Post('login')
 login(@Body() loginDto: LoginDto) {
     return this.authService.login(loginDto);
+}
+
+@Post('autorizar')
+autorizar(@Headers('authorization') authorization: string) {
+    if (!authorization) throw new UnauthorizedException('Token no proporcionado');
+    const token = authorization.replace('Bearer ', '');
+    return this.authService.autorizar(token);
+}
+
+@Post('refrescar')
+refrescar(@Headers('authorization') authorization: string) {
+    if (!authorization) throw new UnauthorizedException('Token no proporcionado');
+    const token = authorization.replace('Bearer ', '');
+    return this.authService.refrescar(token);
 }
 }

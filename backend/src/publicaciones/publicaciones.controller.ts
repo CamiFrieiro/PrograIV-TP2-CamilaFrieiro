@@ -64,4 +64,9 @@ darLike(@Param('id') id: string, @Body('usuarioId') usuarioId: string) {
 quitarLike(@Param('id') id: string, @Body('usuarioId') usuarioId: string) {
     return this.publicacionesService.quitarLike(id, usuarioId);
 }
+
+@Get(':id')
+obtener(@Param('id') id: string) {
+    return this.publicacionesService.obtener(id);
+}
 }

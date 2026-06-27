@@ -73,4 +73,9 @@ async quitarLike(id: string, usuarioId: string) {
     await publicacion.save();
     return { mensaje: 'Like eliminado', likes: publicacion.likes.length };
 }
+
+async obtener(id: string) {
+    return this.publicacionModel.findById(id);
+}
+
 }

@@ -55,6 +55,10 @@ if (!usuario) {
     throw new UnauthorizedException('Credenciales incorrectas');
 }
 
+if (!usuario.habilitado) {
+    throw new UnauthorizedException('Tu cuenta está deshabilitada. Contactá al administrador.');
+}
+
 const passwordValida = await bcrypt.compare(loginDto.password, usuario.password);
 if (!passwordValida) {
     throw new UnauthorizedException('Credenciales incorrectas');
